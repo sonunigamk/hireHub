@@ -39,7 +39,7 @@ export const register = async (req, res) => {
     const tokenData = {
       userId: user._id,
     };
-    const token = jwt.sign(tokenData, process.env.SECRET_KEY, {
+    const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
       expiresIn: "1d",
     });
 
@@ -58,7 +58,7 @@ export const register = async (req, res) => {
         maxAge: 1 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         sameSite: "strict",
-        secure: process.env.NODE_ENV !== "development",
+        // secure: process.env.NODE_ENV !== "development",
       })
       .json({
         message: "Account created successfully.",
@@ -113,7 +113,7 @@ export const login = async (req, res) => {
       userId: user._id,
     };
 
-    const token = jwt.sign(tokenData, process.env.SECRET_KEY, {
+    const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
       expiresIn: "1d",
     });
 
